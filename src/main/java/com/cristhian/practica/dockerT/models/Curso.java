@@ -16,7 +16,7 @@ public class Curso {
     private String ficha;
 
     @OneToMany
-    private ArrayList<Estudiante> estudiantesList;
+    private List<Estudiante> estudiantesList;
 
     @OneToOne
     private Profesor director;

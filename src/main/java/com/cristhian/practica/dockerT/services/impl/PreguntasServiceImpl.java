@@ -4,9 +4,10 @@ import com.cristhian.practica.dockerT.models.Pregunta;
 import com.cristhian.practica.dockerT.repositories.PreguntasRepository;
 import com.cristhian.practica.dockerT.services.IPreguntasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class PreguntasServiceImpl implements IPreguntasService {
 
     private final PreguntasRepository repository;

@@ -4,9 +4,10 @@ import com.cristhian.practica.dockerT.models.NotasExamenes;
 import com.cristhian.practica.dockerT.repositories.NotasExamenRepository;
 import com.cristhian.practica.dockerT.services.INotasExamenes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class NotasExamenImpl implements INotasExamenes {
 
     private final NotasExamenRepository repository;

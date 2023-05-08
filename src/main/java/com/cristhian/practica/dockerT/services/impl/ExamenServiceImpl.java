@@ -4,9 +4,10 @@ import com.cristhian.practica.dockerT.models.Examen;
 import com.cristhian.practica.dockerT.repositories.ExamenRepository;
 import com.cristhian.practica.dockerT.services.IExamenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ExamenServiceImpl implements IExamenService {
 
     private final ExamenRepository repository;

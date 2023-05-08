@@ -4,9 +4,11 @@ import com.cristhian.practica.dockerT.models.Estudiante;
 import com.cristhian.practica.dockerT.repositories.EstudianteRepository;
 import com.cristhian.practica.dockerT.services.IEstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EstudianteServiceImpl implements IEstudianteService {
 
     private final EstudianteRepository repository;

@@ -1,9 +1,9 @@
 package com.cristhian.practica.dockerT.controllers;
 
 
-import com.cristhian.practica.dockerT.Exceptions.StudentNotFoundException;
 import com.cristhian.practica.dockerT.models.Curso;
 import com.cristhian.practica.dockerT.services.ICursoService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,7 @@ public class CursoController {
         this.cursoService = cursoService;
     }
 
+
     @GetMapping("cursos")
     ResponseEntity<List<Curso>> obtenerTodosCursos(){
         return ResponseEntity.ok(cursoService.listTotalCourses());
@@ -30,6 +31,16 @@ public class CursoController {
     ResponseEntity<?> buscarCurso(@PathVariable Integer id){
         try {
             return ResponseEntity.ok(cursoService.findCourse(id));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("curso/{id}")
+    ResponseEntity<?> addNuevoEstudiante(@PathVariable Integer id,@PathParam("idStudent") Integer idStudent){
+
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.addStudent(idStudent,id));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -5,9 +5,10 @@ import com.cristhian.practica.dockerT.repositories.ExamenRepository;
 import com.cristhian.practica.dockerT.repositories.ProfesorRepository;
 import com.cristhian.practica.dockerT.services.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ProfesorServiceImpl implements IProfesorService {
 
     private final ProfesorRepository repository;

@@ -54,7 +54,7 @@ public class EstudianteController {
         }
     }
 
-    @DeleteMapping("estudante/{id")
+    @DeleteMapping("estudante/{id}")
     ResponseEntity<?> eliminarEstudiante(@PathVariable Integer id){
         try {
             estudianteService.deleteStudent(id);
