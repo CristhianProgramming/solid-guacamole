@@ -13,17 +13,14 @@ public class Estudiante {
 
     private Integer identificacion;
 
-    @ManyToOne
-    private Curso curso;
-
     public Estudiante() {
     }
 
-    public Estudiante(Integer id, String nombre, Integer identificacion, Curso curso) {
+    public Estudiante(Integer id, String nombre, Integer identificacion) {
         this.id = id;
         this.nombre = nombre;
         this.identificacion = identificacion;
-        this.curso = curso;
+
     }
 
     public Integer getId() {
@@ -50,11 +47,12 @@ public class Estudiante {
         this.identificacion = identificacion;
     }
 
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", identificacion=" + identificacion +
+                '}';
     }
 }

@@ -2,8 +2,8 @@ package com.cristhian.practica.dockerT.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -16,17 +16,16 @@ public class Curso {
     private String ficha;
 
     @OneToMany
-    private List<Estudiante> estudiantesList;
+    private ArrayList<Estudiante> estudiantesList;
 
     @OneToOne
     private Profesor director;
 
 
-
     public Curso() {
     }
 
-    public Curso(Integer id, String ficha, List<Estudiante> estudiantesList, Profesor director) {
+    public Curso(Integer id, String ficha, ArrayList<Estudiante> estudiantesList, Profesor director) {
         this.id = id;
         this.ficha = ficha;
         this.estudiantesList = estudiantesList;
@@ -53,8 +52,19 @@ public class Curso {
         return estudiantesList;
     }
 
-    public void setEstudiantesList(List<Estudiante> estudiantesList) {
+    public void setEstudiantesList(ArrayList<Estudiante> estudiantesList) {
         this.estudiantesList = estudiantesList;
+    }
+    public void agregarEstudianteList(Estudiante e){
+        this.estudiantesList.add(e);
+    }
+    public void elimnarEstudianteList(Estudiante e){
+        this.estudiantesList.removeIf(p-> Objects.equals(p.getIdentificacion(),e.getIdentificacion()));
+    }
+
+    public  void transferirEstudiante(Estudiante e, @org.jetbrains.annotations.NotNull Curso c){
+        this.elimnarEstudianteList(e);
+        c.agregarEstudianteList(e);
     }
 
     public Profesor getDirector() {
@@ -66,5 +76,13 @@ public class Curso {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", ficha='" + ficha + '\'' +
+                ", estudiantesList=" + estudiantesList +
+                ", director=" + director +
+                '}';
+    }
 }

@@ -1,10 +1,12 @@
 package com.cristhian.practica.dockerT.services.impl;
 
 import com.cristhian.practica.dockerT.models.Curso;
+import com.cristhian.practica.dockerT.models.Estudiante;
 import com.cristhian.practica.dockerT.repositories.CursoRepository;
 import com.cristhian.practica.dockerT.services.ICursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CursoServiceImpl implements ICursoService {
@@ -22,9 +24,18 @@ public class CursoServiceImpl implements ICursoService {
     }
 
     @Override
+    public Curso addStudent(Estudiante estudiante, Integer id) {
+      Curso curso =  findCourse(id);
+      curso.agregarEstudianteList(estudiante);
+      updateCourse(curso);
+      return curso;
+    }
+
+    @Override
     public Curso findCourse(Integer id) {
         return repository.findById(id).orElseThrow();
     }
+
 
     @Override
     public Curso createCourse(Curso curso) {

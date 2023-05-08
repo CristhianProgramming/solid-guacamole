@@ -1,11 +1,11 @@
 package com.cristhian.practica.dockerT.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "notas")
 public class NotasExamenes {
     @Id
     @GeneratedValue

@@ -18,7 +18,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
 
     @Override
     public List<Estudiante> listTotalStudents() {
-        return repository.findAll();
+        return (List<Estudiante>) repository.findAll();
     }
 
     @Override
