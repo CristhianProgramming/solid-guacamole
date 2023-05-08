@@ -32,8 +32,15 @@ public class EstudianteServiceImpl implements IEstudianteService {
     }
 
     @Override
-    public void updateStudent(Estudiante estudiante) {
-        repository.save(estudiante);
+    public void updateStudent(Estudiante estudiante,Integer id) {
+        Estudiante actualEstudiante = findStudent(id);
+        if ( actualEstudiante==null){}
+        else{
+            actualEstudiante.setNombre(estudiante.getNombre());
+            actualEstudiante.setIdentificacion(estudiante.getIdentificacion());
+            repository.save(estudiante);
+        }
+
     }
 
     @Override

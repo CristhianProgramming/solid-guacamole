@@ -1,5 +1,6 @@
 package com.cristhian.practica.dockerT.services.impl;
 
+import com.cristhian.practica.dockerT.Exceptions.StudentNotFoundException;
 import com.cristhian.practica.dockerT.models.Curso;
 import com.cristhian.practica.dockerT.models.Estudiante;
 import com.cristhian.practica.dockerT.repositories.CursoRepository;
@@ -24,10 +25,10 @@ public class CursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public Curso addStudent(Estudiante estudiante, Integer id) {
+    public Curso addStudent(Estudiante estudiante, Integer id)  throws StudentNotFoundException {
       Curso curso =  findCourse(id);
       curso.agregarEstudianteList(estudiante);
-      updateCourse(curso);
+      updateCourse(curso,id);
       return curso;
     }
 
@@ -43,8 +44,13 @@ public class CursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public void updateCourse(Curso curso) {
-        repository.save(curso);
+    public void updateCourse(Curso curso,Integer id) {
+       Curso cursoActual = findCourse(id);
+       if (cursoActual == null){
+       }else{
+           repository.save(curso);
+       }
+
     }
 
     @Override

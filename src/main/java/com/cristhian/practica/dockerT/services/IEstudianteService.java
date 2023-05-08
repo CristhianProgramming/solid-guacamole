@@ -13,7 +13,7 @@ public interface IEstudianteService {
 
     Estudiante createStudent(Estudiante estudiante);
 
-    void updateStudent(Estudiante estudiante);
+    void updateStudent(Estudiante estudiante,Integer id);
 
     void deleteStudent(Integer id);
 

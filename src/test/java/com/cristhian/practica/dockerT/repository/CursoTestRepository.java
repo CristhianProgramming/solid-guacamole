@@ -25,24 +25,19 @@ public class CursoTestRepository {
     @Autowired
     private EstudianteRepository repositoryEstudiantes;
 
-    @BeforeEach
-    void setUp() {
-//        Registro estudiantes
-        repositoryEstudiantes.save(Pruebas.ESTUDIANTES_LIST.get(0));
-        repositoryEstudiantes.save(Pruebas.ESTUDIANTES_LIST.get(1));
-    }
 
     @Test
+    @Order(1)
     void pruebaRegistroCurso(){
-      Curso respuesta =  repositoryCurso.save(Pruebas.CURSOS_LIST.get(0));
-      assertEquals("CURS1",respuesta.getFicha());
+      Curso respuesta =  repositoryCurso.save(new Curso(3,"CRUSO3",Pruebas.ESTUDIANTES_LIST,null));
+      assertEquals("CRUSO3",respuesta.getFicha());
     }
 
     @Test
+    @Order(2)
     void agregarStudiante(){
         Curso respuesta =  repositoryCurso.save(Pruebas.CURSOS_LIST.get(0));
-        Estudiante nuevo = new Estudiante(3,"Pedro carlos Borrego",103001499);
-        assertEquals("CURS1",respuesta.getFicha());
+        Estudiante nuevo = repositoryEstudiantes.findById(3).get();
         repositoryEstudiantes.save(nuevo);
         respuesta.agregarEstudianteList(nuevo);
         Curso respuesta_mod = repositoryCurso.save(respuesta);
@@ -51,6 +46,7 @@ public class CursoTestRepository {
     }
 
     @Test
+    @Order(4)
     void EliminarEStudiante(){
         Curso respuesta =  repositoryCurso.save(Pruebas.CURSOS_LIST.get(0));
         assertEquals("CURS1",respuesta.getFicha());
@@ -61,17 +57,18 @@ public class CursoTestRepository {
     }
 
     @Test
+    @Order(3)
     void TransferirEstudiante(){
-        repositoryEstudiantes.save(new Estudiante(3,"Pedro carlos Borrego",103001499));
         Curso curso1 =  repositoryCurso.save(new Curso(1,"CURST", new ArrayList<>(Arrays.asList(new Estudiante(3,"Pedro carlos Borrego",103001499))),null));
         Curso curso2 =  repositoryCurso.save(Pruebas.CURSOS_LIST.get(1));
         //        TRANFERIR ESTUDIANTE
         curso2.transferirEstudiante(Pruebas.ESTUDIANTES_LIST.get(1),curso1);
         Curso respuesta1 = repositoryCurso.save(curso1);
         Curso respuesta2 = repositoryCurso.save(curso2);
-        //        CONFIRMACION
+//        CONFIRMACION
         assertEquals(2,respuesta1.getEstudiantesList().size());
         assertEquals(1,respuesta2.getEstudiantesList().size());
+
     }
 
 }
