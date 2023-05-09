@@ -40,7 +40,7 @@ public class EstudianteController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(estudianteService.createStudent(payload));
         }catch (Exception e){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -50,11 +50,11 @@ public class EstudianteController {
             estudianteService.updateStudent(payload,id);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }catch (Exception e){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @DeleteMapping("estudante/{id}")
+    @DeleteMapping("estudiante/{id}")
     ResponseEntity<?> eliminarEstudiante(@PathVariable Integer id){
         try {
             estudianteService.deleteStudent(id);

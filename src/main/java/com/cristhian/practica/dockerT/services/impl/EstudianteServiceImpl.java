@@ -38,9 +38,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
         Estudiante actualEstudiante = findStudent(id);
         if ( actualEstudiante==null){}
         else{
-            actualEstudiante.setNombre(estudiante.getNombre());
-            actualEstudiante.setIdentificacion(estudiante.getIdentificacion());
-            repository.save(estudiante);
+            if (estudiante.getNombre() != null) {
+                actualEstudiante.setNombre(estudiante.getNombre());
+            }
+            if (estudiante.getIdentificacion() != null) {
+                actualEstudiante.setIdentificacion(estudiante.getIdentificacion());
+            }
+            repository.save(actualEstudiante);
         }
 
     }

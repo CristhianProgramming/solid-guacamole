@@ -7,9 +7,13 @@ import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -46,7 +50,16 @@ public class CursoController {
     }
 
     @PostMapping("curso")
-    ResponseEntity<?> crearNuevoCurso(@RequestBody Curso payload){
+    ResponseEntity<?> crearNuevoCurso(@Valid @RequestBody Curso payload, BindingResult result){
+
+        if (result.hasErrors()){
+            Map<String, String> response = new HashMap<>();
+            result.getAllErrors().forEach(error->{
+                response.put(error.getObjectName(),error.getDefaultMessage());
+            });
+            return ResponseEntity.badRequest().body(response);
+        }
+
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.createCourse(payload));
         } catch (Exception e){

@@ -2,6 +2,9 @@ package com.cristhian.practica.dockerT.models;
 
 import jakarta.persistence.*;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "estudiantes")
 public class Estudiante {
@@ -11,6 +14,8 @@ public class Estudiante {
 
     private String nombre;
 
+    @NotNull
+    @Column(unique = true)
     private Integer identificacion;
 
     public Estudiante() {
