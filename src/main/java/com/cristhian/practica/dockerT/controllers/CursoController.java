@@ -21,7 +21,6 @@ public class CursoController {
         this.cursoService = cursoService;
     }
 
-
     @GetMapping("cursos")
     ResponseEntity<List<Curso>> obtenerTodosCursos(){
         return ResponseEntity.ok(cursoService.listTotalCourses());
@@ -57,6 +56,11 @@ public class CursoController {
 
     @PutMapping("curso/{id}")
     ResponseEntity<?> actualizarCurso(@RequestBody Curso payload , @PathVariable Integer id){
+
+        if (payload == null) {
+        return ResponseEntity.badRequest().body("Empty Body");
+        }
+
         try {
             cursoService.updateCourse(payload,id);
             return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -69,7 +73,7 @@ public class CursoController {
     ResponseEntity<?> eliminarCurso(@PathVariable Integer id){
         try {
             cursoService.deleteCourse(id);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

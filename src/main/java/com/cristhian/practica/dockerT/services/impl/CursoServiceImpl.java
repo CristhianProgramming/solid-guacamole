@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CursoServiceImpl implements ICursoService {
 
@@ -18,13 +20,11 @@ public class CursoServiceImpl implements ICursoService {
 
     private final EstudianteRepository estudianteRepository;
 
+    @Autowired
     public CursoServiceImpl(CursoRepository repository, EstudianteRepository estudianteRepository) {
         this.repository = repository;
         this.estudianteRepository = estudianteRepository;
     }
-
-    @Autowired
-
 
     @Override
     public List<Curso> listTotalCourses() {
@@ -52,11 +52,18 @@ public class CursoServiceImpl implements ICursoService {
     }
 
     @Override
-    public void updateCourse(Curso curso,Integer id) {
-       Curso cursoActual = findCourse(id);
-       if (cursoActual == null){
+    public Curso updateCourse(Curso curso,Integer id) {
+       Optional<Curso> cursoActual = repository.findById(id);
+       if (cursoActual.isEmpty()){
+            return curso;
        }else{
-           repository.save(curso);
+           if (curso.getFicha() != null) {
+               cursoActual.get().setFicha(curso.getFicha());
+           }
+           if (curso.getDirector() != null) {
+               cursoActual.get().setDirector(curso.getDirector());
+           }
+           return repository.save(cursoActual.get());
        }
 
     }

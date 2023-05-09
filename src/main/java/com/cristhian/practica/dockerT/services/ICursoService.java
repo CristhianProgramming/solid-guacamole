@@ -18,7 +18,7 @@ public interface ICursoService {
 
     Curso createCourse(Curso curso);
 
-    void updateCourse(Curso curso,Integer id);
+    Curso updateCourse(Curso curso,Integer id);
 
     void deleteCourse(Integer id);
 }
